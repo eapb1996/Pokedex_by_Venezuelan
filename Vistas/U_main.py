@@ -29,6 +29,9 @@ class Users(tk.Tk):
         self.current_frame = page_class(self.container, self)
         self.current_frame.pack(fill="both", expand=True)
 
+    def open(self):
+        self.mainloop()
+
 class SecondaryPage(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
@@ -127,7 +130,9 @@ class M_Usuarios(tk.Frame):
             highlightthickness=0,
             relief="raised",
             bg="#6D6CFA",
-            activebackground="#6D6CFA"
+            activebackground="#6D6CFA",
+            command=lambda: self.open_seleccion(),
+
         ).place(x=1135.0, y=15.0, width=208.0, height=29.0)
         
         # Boton listar para ver a los usuarios
@@ -161,6 +166,10 @@ class M_Usuarios(tk.Frame):
             command=lambda: self.controller.show_frame(Eliminar),
             relief="flat"
         ).place(x=1.0, y=173.0, width=213.0, height=58.0)
+    def open_seleccion(self):
+        self.controller.destroy()  ##### Cierra solo la ventana  actual
+        from Vistas.R_selection import selection
+        selection().open() 
 
 #Clase para el Eliminar
 class Eliminar(tk.Frame):
