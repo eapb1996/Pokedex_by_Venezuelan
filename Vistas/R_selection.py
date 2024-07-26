@@ -7,17 +7,25 @@ OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Pokedex_by_Venezuelan\assets")
            
 class selection():
+    def __init__(self):
+        self.window = None
+        
     def open_new(self):
         self.window.destroy()
-        Balls().show_frame()
+        Balls().open()
         
     def open_U_main(self):
         self.window.destroy()
-        Users().show_frame()
+        Users().open()
         
     def open(self):
         def relative_to_assets(path: str) -> Path:
             return ASSETS_PATH / Path(path)
+        
+
+        if self.window is not None and self.window.winfo_exists():
+            self.window.lift()
+            return
         
         self.window = Tk()
 
